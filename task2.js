@@ -2,8 +2,8 @@ function getNumberRadix(number, radix) {
   const parsedNumber = Number.parseInt(number.toString());
   const parsedRadix = Number.parseInt(radix.toString());
   if (
-    isNaN(parsedNumber) ||
-    isNaN(parsedRadix) ||
+    Number.isNaN(parsedNumber) ||
+    Number.isNaN(parsedRadix) ||
     parsedNumber < 0 ||
     parsedRadix < 2 ||
     parsedRadix > 16
