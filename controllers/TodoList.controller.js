@@ -38,15 +38,10 @@ export default class TodoListController {
       todos: this.#todos,
     });
     this.#Loader = new LoaderComponent(this.#rootElement);
+    this.init();
   }
 
-  run(page = 1) {
-    if (page !== this.#currentPage) {
-      this.#currentPage = page;
-      this.#PaginationComponent.setCurrentPage(page);
-    }
-    this.fetchTodos();
-
+  init() {
     this.on(TodoListController.EVENTS.TODOS_UPDATE, (todos) => {
       this.#TodoListComponent.setTodos(todos);
     });
@@ -57,9 +52,17 @@ export default class TodoListController {
       this.fetchTodos();
       this.#PaginationComponent.setCurrentPage(newPage);
     });
+  }
 
+  run(page) {
     this.#PaginationComponent.render();
     this.#TodoListComponent.render();
+
+    if (page !== this.#currentPage) {
+      this.setCurrentPage(page);
+    } else {
+      this.fetchTodos();
+    }
   }
 
   async fetchTodos() {

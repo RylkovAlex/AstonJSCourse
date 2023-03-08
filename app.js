@@ -17,7 +17,8 @@ const todoListController = new TodoListController(
 );
 
 // роутинг вроде работает, но нормально не тестил:
-const page = new URL(window.location).searchParams.get('page');
+const pageStr = new URL(window.location).searchParams.get('page');
+const page = +pageStr || 1;
 todoListController.on(TodoListController.EVENTS.PAGE_UPDATE, (page) => {
   const url = new URL(window.location);
   url.searchParams.set('page', page);
